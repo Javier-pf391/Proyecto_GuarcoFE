@@ -99,11 +99,3 @@
     </div>
 </form>
 
-<!-- Lista con medias de horas -->
-<h4 class="mt-5">Resumen de Tiempos (en horas)</h4>
-<ul>
-    <li><strong>Inicio → Finalización:</strong> @(horasInicioAFinal?.ToString("0.##") ?? "N/A") horas</li>
-    <li><strong>Revisión Inicio → Revisión Fin:</strong> @(horasRevision?.ToString("0.##") ?? "N/A") horas</li>
-    <li><strong>Revisión Fin → Aprobación:</strong> @(horasAprobacion?.ToString("0.##") ?? "N/A") horas</li>
-    <li><strong>Promedio Total:</strong> @(promedioTotal?.ToString("0.##") ?? "N/A") horas</li>
-</ul>
