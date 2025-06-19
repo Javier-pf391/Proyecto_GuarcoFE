@@ -12,7 +12,7 @@ namespace WebApi.Controllers
         {
             if (!ModelState.IsValid)
             {
-                // Regresa la vista con errores de validación
+               
                 return View(pDocumentos);
             }
 
@@ -34,7 +34,7 @@ namespace WebApi.Controllers
             }
 
             await obj.Crear_documentos(pDocumentos);
-            // ✅ Enviar correo
+          
             string asunto = "📄 Documento creado";
 
             string cuerpo = $@"
@@ -49,7 +49,7 @@ namespace WebApi.Controllers
 ";
             await _emailService.SendEmailAsync("javierpadillafallas@gmail.com", asunto, cuerpo);
 
-            // Redirige a la búsqueda después de guardar
+          
             return RedirectToAction("BusquedaCodigo");
         }
         public IActionResult Inicio()
@@ -237,7 +237,7 @@ namespace WebApi.Controllers
         public async Task<IActionResult> VerHoras()
         {
             GestorConexion obj = new GestorConexion();
-            List<Documentos_GuarcoModel> documentos = await obj.VerHoras(); // Trae todos
+            List<Documentos_GuarcoModel> documentos = await obj.VerHoras(); 
 
             double totalHorasInicioFinal = 0, totalHorasRevision = 0, totalHorasAprobacion = 0;
             int countInicioFinal = 0, countRevision = 0, countAprobacion = 0;
@@ -256,7 +256,7 @@ namespace WebApi.Controllers
                     countRevision++;
                 }
 
-                // 🔄 Cambiado: cálculo desde revisión inicio hasta aprobación
+            
                 if (doc.Fecha_aprobacion.HasValue && doc.Fecha_revision_inicio.HasValue)
                 {
                     totalHorasAprobacion += (doc.Fecha_aprobacion - doc.Fecha_revision_inicio).Value.TotalHours;
@@ -271,7 +271,7 @@ namespace WebApi.Controllers
                 PromedioAprobacion = countAprobacion > 0 ? totalHorasAprobacion / countAprobacion : 0
             };
 
-            // DEBUG opcional
+      
             Console.WriteLine($"Inicio-Final: {modeloPromedio.PromedioInicioFinal}");
             Console.WriteLine($"Revision: {modeloPromedio.PromedioRevision}");
             Console.WriteLine($"Aprobacion: {modeloPromedio.PromedioAprobacion}");
