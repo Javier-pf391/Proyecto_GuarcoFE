@@ -1,0 +1,64 @@
+﻿@model IEnumerable<WebApi.Models.Documentos_GuarcoModel>
+
+@{
+    ViewData["Title"] = "Documentos Aprobados";
+}
+
+<h1 style="color:aqua;">Lista de Documentos</h1>
+
+@if (Model != null && Model.Any())
+{
+    <table class="tabla-documentos table-bordered table-striped sin-subrayado">
+        <thead>
+            <tr>
+                <!-- Columnas ocultas -->
+                <th style="display:none">@Html.DisplayNameFor(model => model.First().id_documento)</th>
+                <th style="display:none">@Html.DisplayNameFor(model => model.First().Fecha_inicio)</th>
+                <th style="display:none">@Html.DisplayNameFor(model => model.First().Fecha_finalizacion)</th>
+                <th style="display:none">@Html.DisplayNameFor(model => model.First().Fecha_revision_inicio)</th>
+                <th style="display:none">@Html.DisplayNameFor(model => model.First().Fecha_revision_finalizacion)</th>
+                <th style="display:none">@Html.DisplayNameFor(model => model.First().Fecha_aprobacion)</th>
+
+                <!-- Columnas visibles -->
+                <th>@Html.DisplayNameFor(model => model.First().codigo)</th>
+                <th>@Html.DisplayNameFor(model => model.First().nombre)</th>
+                <th>@Html.DisplayNameFor(model => model.First().tipo)</th>
+                <th>@Html.DisplayNameFor(model => model.First().nombre_area)</th>
+                <th>@Html.DisplayNameFor(model => model.First().estado)</th>
+                <th>Acciones</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <!-- Datos ocultos -->
+                    <td style="display:none">@Html.DisplayFor(modelItem => item.id_documento)</td>
+                    <td style="display:none">@Html.DisplayFor(modelItem => item.Fecha_inicio)</td>
+                    <td style="display:none">@Html.DisplayFor(modelItem => item.Fecha_finalizacion)</td>
+                    <td style="display:none">@Html.DisplayFor(modelItem => item.Fecha_revision_inicio)</td>
+                    <td style="display:none">@Html.DisplayFor(modelItem => item.Fecha_revision_finalizacion)</td>
+                    <td style="display:none">@Html.DisplayFor(modelItem => item.Fecha_aprobacion)</td>
+
+                    <!-- Datos visibles -->
+                    <td>@Html.DisplayFor(modelItem => item.codigo)</td>
+                    <td>@Html.DisplayFor(modelItem => item.nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.tipo)</td>
+                    <td>@Html.DisplayFor(modelItem => item.nombre_area)</td>
+                    <td>@Html.DisplayFor(modelItem => item.estado)</td>
+                    <td>
+                        @Html.ActionLink("Ver información", "VerDocumentos", new { pID = item.id_documento }, new { @class = "btn btn-info" })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Eliminar", "Eliminar_documentos", new { pID = item.id_documento }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No se encontraron documentos.</p>
+}

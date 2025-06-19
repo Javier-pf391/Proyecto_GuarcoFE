@@ -1,0 +1,55 @@
+﻿@model dynamic
+
+@{
+    ViewData["Title"] = "Promedio de Horas";
+}
+
+<h2>Promedio de Horas</h2>
+
+<ul>
+    <li><strong>Inicio → Finalización:</strong> @Model.PromedioInicioFinal.ToString("0.##") horas</li>
+    <li><strong>Revisión Inicio → Revisión Fin:</strong> @Model.PromedioRevision.ToString("0.##") horas</li>
+    <li><strong>Revisión Inicio → Aprobación:</strong> @Model.PromedioAprobacion.ToString("0.##") horas</li>
+</ul>
+
+<canvas id="graficoHoras" width="400" height="200"></canvas>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('graficoHoras').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Inicio → Final', 'Revisión', 'Aprobación'],
+                datasets: [{
+                    label: 'Horas Promedio',
+                    data: [
+        @Model.PromedioInicioFinal.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture),
+        @Model.PromedioRevision.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture),
+        @Model.PromedioAprobacion.ToString("0.##", System.Globalization.CultureInfo.InvariantCulture)
+                            ],
+                    backgroundColor: ['#4e73df', '#1cc88a', '#f6c23e'],
+                    borderColor: ['#4e73df', '#1cc88a', '#f6c23e'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Horas'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    </script>
+}

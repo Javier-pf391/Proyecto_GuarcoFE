@@ -1,0 +1,62 @@
+﻿@model WebApi.Models.Documentos_GuarcoModel
+
+@{
+    ViewData["Title"] = "Crear Documento";
+}
+@{
+    var areas = new List<SelectListItem>
+    {
+        new SelectListItem { Text = "Calidad", Value = "Calidad" },
+        new SelectListItem { Text = "Contabilidad", Value = "Contabilidad" },
+        new SelectListItem { Text = "Informática", Value = "Informática" }
+    };
+}
+
+<h1>Crear Documento</h1>
+
+<form method="post">
+    <div class="form-group col-md-6">
+        <label asp-for="codigo" class="control-label"></label>
+        <input asp-for="codigo" class="form-control" />
+        <span asp-validation-for="codigo" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="nombre" class="control-label"></label>
+        <input asp-for="nombre" class="form-control" />
+        <span asp-validation-for="nombre" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="tipo" class="control-label"></label>
+        <input asp-for="tipo" class="form-control" />
+        <span asp-validation-for="tipo" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="nombre_area" class="control-label"></label>
+        <select asp-for="nombre_area" class="form-control" asp-items="areas">
+            <option value=""></option>
+        </select>
+        <span asp-validation-for="nombre_area" class="text-danger"></span>
+    </div>
+
+    <div class="form-group col-md-6">
+        <label asp-for="telefono" class="control-label"></label>
+        <input asp-for="telefono" class="form-control" value="21064600" readonly />
+        <span asp-validation-for="telefono" class="text-danger"></span>
+    </div>
+
+    <div class="form-group col-md-6">
+        <label asp-for="Fecha_inicio" class="control-label"></label>
+        <input asp-for="Fecha_inicio" class="form-control" readonly />
+        <span asp-validation-for="Fecha_inicio" class="text-danger"></span>
+    </div>
+    <div class="form-group col-md-12">
+        <label asp-for="documento" class="control-label"></label>
+        <textarea asp-for="documento" class="form-control" rows="10" style="resize: vertical;"></textarea>
+        <span asp-validation-for="documento" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" name="action" value="Guardar y Salir" class="btn btn-primary" />
+        <input type="submit" name="action" value="Finalizar" class="btn btn-success" />
+    </div>
+</form>

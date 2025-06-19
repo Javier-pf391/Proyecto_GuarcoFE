@@ -1,0 +1,72 @@
+﻿@model IEnumerable<WebApi.Models.Documentos_GuarcoModel>
+
+@{
+    ViewData["Title"] = "Búsqueda de Documento";
+    string codigoBuscado = Context.Request.Query["pCodigo"];
+}
+
+<h1 style="color:red;">Lista de Documentos</h1>
+
+<!-- FORMULARIO DE BÚSQUEDA -->
+<form asp-action="BusquedaCodigo" asp-controller="Documentos_Guarco" method="get">
+    <div class="form-group">
+        <label for="pCodigo">Búsqueda por Código</label>
+        <input type="text" id="pCodigo" name="pCodigo" class="form-control" value="@codigoBuscado" />
+        <button type="submit" class="btn btn-primary mt-2">Buscar</button>
+    </div>
+</form>
+
+
+<a asp-action="Crear_documentos" asp-controller="Documentos_Guarco" class="btn btn-success mt-3">
+    Crear Documento
+</a>
+
+<br />
+<br />
+
+@if (Model != null && Model.Any())
+{
+    <table class="tabla-documentos table-bordered table-striped sin-subrayado">
+        <thead>
+            <tr>
+                <th style="display:none">@Html.DisplayNameFor(model => model.First().id_documento)</th>
+                <th style="display:none">@Html.DisplayNameFor(model => model.First().Fecha_inicio)</th>
+                <th style="display:none">@Html.DisplayNameFor(model => model.First().Fecha_finalizacion)</th>
+                <th style="display:none">@Html.DisplayNameFor(model => model.First().Fecha_revision_inicio)</th>
+                <th style="display:none">@Html.DisplayNameFor(model => model.First().Fecha_revision_finalizacion)</th>
+                <th style="display:none">@Html.DisplayNameFor(model => model.First().Fecha_aprobacion)</th>
+                <th>@Html.DisplayNameFor(model => model.First().codigo)</th>
+                <th>@Html.DisplayNameFor(model => model.First().nombre)</th>
+                <th>@Html.DisplayNameFor(model => model.First().tipo)</th>
+                <th>@Html.DisplayNameFor(model => model.First().nombre_area)</th>
+                <th>@Html.DisplayNameFor(model => model.First().estado)</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="display:none">@Html.DisplayFor(modelItem => item.id_documento)</td>
+                    <td style="display:none">@Html.DisplayFor(modelItem => item.Fecha_inicio)</td>
+                    <td style="display:none">@Html.DisplayFor(modelItem => item.Fecha_finalizacion)</td>
+                    <td style="display:none">@Html.DisplayFor(modelItem => item.Fecha_revision_inicio)</td>
+                    <td style="display:none">@Html.DisplayFor(modelItem => item.Fecha_revision_finalizacion)</td>
+                    <td style="display:none">@Html.DisplayFor(modelItem => item.Fecha_aprobacion)</td>
+                    <td>@Html.DisplayFor(modelItem => item.codigo)</td>
+                    <td>@Html.DisplayFor(modelItem => item.nombre)</td>
+                    <td>@Html.DisplayFor(modelItem => item.tipo)</td>
+                    <td>@Html.DisplayFor(modelItem => item.nombre_area)</td>
+                    <td>@Html.DisplayFor(modelItem => item.estado)</td>
+                    <td>
+                        @Html.ActionLink("Ver información", "VerDocumentos", new { pID = item.id_documento }, new { @class = "btn btn-warning" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No se encontraron documentos.</p>
+}

@@ -1,0 +1,109 @@
+﻿@model WebApi.Models.Documentos_GuarcoModel
+
+@{
+    ViewData["Title"] = "Ver Documento";
+
+    // Cálculo de horas entre Fechas
+    double? horasInicioAFinal = null;
+    double? horasRevision = null;
+    double? horasAprobacion = null;
+    double? promedioTotal = null;
+
+    if (Model.Fecha_inicio.HasValue && Model.Fecha_finalizacion.HasValue)
+    {
+        horasInicioAFinal = (Model.Fecha_finalizacion - Model.Fecha_inicio)?.TotalHours;
+    }
+
+    if (Model.Fecha_revision_inicio.HasValue && Model.Fecha_revision_finalizacion.HasValue)
+    {
+        horasRevision = (Model.Fecha_revision_finalizacion - Model.Fecha_revision_inicio)?.TotalHours;
+    }
+
+    if (Model.Fecha_aprobacion.HasValue && Model.Fecha_revision_finalizacion.HasValue)
+    {
+        horasAprobacion = (Model.Fecha_aprobacion - Model.Fecha_revision_finalizacion)?.TotalHours;
+    }
+
+    // Cálculo del promedio total de las horas válidas
+    var horasValidas = new List<double>();
+    if (horasInicioAFinal.HasValue) horasValidas.Add(horasInicioAFinal.Value);
+    if (horasRevision.HasValue) horasValidas.Add(horasRevision.Value);
+    if (horasAprobacion.HasValue) horasValidas.Add(horasAprobacion.Value);
+
+    if (horasValidas.Count > 0)
+    {
+        promedioTotal = horasValidas.Average();
+    }
+}
+
+<h1>Ver Documento</h1>
+
+<form asp-action="VerDocumentos" method="post">
+    <!-- Campos ocultos -->
+    <input type="hidden" asp-for="id_documento" />
+    <input type="hidden" asp-for="estado" />
+
+    <!-- Datos generales -->
+    <div class="form-group col-md-6">
+        <label asp-for="nombre"></label>
+        <input asp-for="nombre" class="form-control" readonly />
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="tipo"></label>
+        <input asp-for="tipo" class="form-control" readonly />
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="nombre_area"></label>
+        <input asp-for="nombre_area" class="form-control" readonly />
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="telefono"></label>
+        <input asp-for="telefono" class="form-control" readonly />
+    </div>
+
+    <!-- Fechas legibles -->
+    <div class="form-group col-md-6">
+        <label asp-for="Fecha_inicio">Fecha de Inicio</label>
+        <input type="text" class="form-control" readonly
+               value="@Model.Fecha_inicio?.ToString("yyyy-MM-dd HH:mm")" />
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="Fecha_finalizacion">Fecha de Finalización</label>
+        <input type="text" class="form-control" readonly
+               value="@Model.Fecha_finalizacion?.ToString("yyyy-MM-dd HH:mm")" />
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="Fecha_revision_inicio">Inicio de Revisión</label>
+        <input type="text" class="form-control" readonly
+               value="@Model.Fecha_revision_inicio?.ToString("yyyy-MM-dd HH:mm")" />
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="Fecha_revision_finalizacion">Fin de Revisión</label>
+        <input type="text" class="form-control" readonly
+               value="@Model.Fecha_revision_finalizacion?.ToString("yyyy-MM-dd HH:mm")" />
+    </div>
+    <div class="form-group col-md-6">
+        <label asp-for="Fecha_aprobacion">Fecha de Aprobación</label>
+        <input type="text" class="form-control" readonly
+               value="@Model.Fecha_aprobacion?.ToString("yyyy-MM-dd HH:mm")" />
+    </div>
+
+    <!-- Contenido del documento -->
+    <div class="form-group col-md-12">
+        <label asp-for="documento"></label>
+        <textarea asp-for="documento" class="form-control" rows="10" readonly></textarea>
+    </div>
+
+    <div class="form-group mt-3">
+        <a asp-action="BusquedaCodigo" class="btn btn-secondary">Volver</a>
+    </div>
+</form>
+
+<!-- Lista con medias de horas -->
+<h4 class="mt-5">Resumen de Tiempos (en horas)</h4>
+<ul>
+    <li><strong>Inicio → Finalización:</strong> @(horasInicioAFinal?.ToString("0.##") ?? "N/A") horas</li>
+    <li><strong>Revisión Inicio → Revisión Fin:</strong> @(horasRevision?.ToString("0.##") ?? "N/A") horas</li>
+    <li><strong>Revisión Fin → Aprobación:</strong> @(horasAprobacion?.ToString("0.##") ?? "N/A") horas</li>
+    <li><strong>Promedio Total:</strong> @(promedioTotal?.ToString("0.##") ?? "N/A") horas</li>
+</ul>

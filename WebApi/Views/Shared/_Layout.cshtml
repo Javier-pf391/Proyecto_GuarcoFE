@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Inicio</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebApi.styles.css" asp-append-version="true" />
+
+    <style>
+        .custom-tab-menu .nav-link {
+            background-color: dodgerblue;
+            color: black;
+            border-radius: 0;
+            border: 1px solid transparent;
+            margin-bottom: 5px;
+        }
+
+            .custom-tab-menu .nav-link.active,
+            .custom-tab-menu .nav-link:focus,
+            .custom-tab-menu .nav-link:hover {
+                background-color: #20c997; /* Verde agua */
+                color: black;
+                border-color: #20c997;
+            }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Menú lateral como pestañas -->
+            <div class="col-md-2 pt-3">
+                <ul class="nav flex-column custom-tab-menu">
+                 @*    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "Index" ? "active" : "")"
+                           asp-area=""
+                           asp-controller="Home"
+                           asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "Privacy" ? "active" : "")"
+                           asp-area=""
+                           asp-controller="Home"
+                           asp-action="Privacy">Privacy</a>
+                    </li> *@
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "Inicio" ? "active" : "")"
+                           asp-area=""
+                           asp-controller="Documentos_Guarco"
+                           asp-action="Inicio">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "BusquedaDocumentos" ? "active" : "")"
+                           asp-area=""
+                           asp-controller="Documentos_Guarco"
+                           asp-action="BusquedaCodigo">Buscar Documentos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "DocumentosElaboracion" ? "active" : "")"
+                           asp-area=""
+                           asp-controller="Documentos_Guarco"
+                           asp-action="DocumentosElaboracion">Documentos en Elaboracion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "DocumentosRevision" ? "active" : "")"
+                           asp-area=""
+                           asp-controller="Documentos_Guarco"
+                           asp-action="DocumentosRevision">Documentos en Revision</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "DocumentosAprobado" ? "active" : "")"
+                           asp-area=""
+                           asp-controller="Documentos_Guarco"
+                           asp-action="DocumentosAprobado">Documentos Aprobados</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["action"].ToString() == "VerHoras" ? "active" : "")"
+                           asp-area=""
+                           asp-controller="Documentos_Guarco"
+                           asp-action="VerHoras">Ver Horas</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Contenido de la vista -->
+            <div class="col-md-10 pt-3">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <footer class="border-top footer text-muted mt-4">
+        <div class="container">
+            &copy; 2025 - WebApi
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>@RenderSection("Scripts", required: false)
+

@@ -1,0 +1,58 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+<style >
+.nav-pills .nav-link {
+    color: black;
+    background-color: transparent;
+    border-radius: 0;
+}
+
+.nav-pills .nav-link.active {
+    background-color: #20c997; 
+    color: black;
+}
+
+.nav-pills .nav-link:hover {
+    background-color: #a8f0dd;
+    color: black;
+}
+
+</style >
+
+.tabla-documentos {
+    border: 3px solid #800080; 
+    border-collapse: collapse; 
+    width: 100%; 
+}
+
+.tabla-documentos th,
+.tabla-documentos td {
+    border: 2px solid #800080;
+    padding: 8px; 
+    text-align: left; 
+}
+
+.tabla-documentos th {
+    background-color: #f2f2f2;
+}
+

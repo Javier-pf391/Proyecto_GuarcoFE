@@ -1,0 +1,55 @@
+﻿@model WebApi.Models.Documentos_GuarcoModel
+
+@{
+    ViewData["Title"] = "Modificar Documentos";
+}
+
+
+<h1>Modificar Documento</h1>
+
+<form asp-action="ModificarDocumentos" method="post">
+    <!-- Campos ocultos -->
+    <input type="hidden" asp-for="id_documento" />
+    <input type="hidden" asp-for="estado" />
+    <input type="hidden" asp-for="Fecha_inicio" />
+    <input type="hidden" asp-for="Fecha_finalizacion" />
+    <input type="hidden" asp-for="Fecha_revision_inicio" />
+    <input type="hidden" asp-for="Fecha_revision_finalizacion" />
+    <input type="hidden" asp-for="Fecha_aprobacion" />
+
+    <div class="form-group col-md-6">
+        <label asp-for="codigo"></label>
+        <input asp-for="codigo" class="form-control" />
+    </div>
+
+    <div class="form-group col-md-6">
+        <label asp-for="nombre"></label>
+        <input asp-for="nombre" class="form-control" />
+    </div>
+
+    <div class="form-group col-md-6">
+        <label asp-for="tipo"></label>
+        <input asp-for="tipo" class="form-control" />
+    </div>
+
+    <div class="form-group col-md-6">
+        <label asp-for="nombre_area"></label>
+        <input asp-for="nombre_area" class="form-control" readonly />
+    </div>
+
+    <div class="form-group col-md-6">
+        <label asp-for="telefono"></label>
+        <input asp-for="telefono" class="form-control" readonly />
+    </div>
+
+    <div class="form-group col-md-12">
+        <label asp-for="documento"></label>
+        <textarea asp-for="documento" class="form-control" rows="10"></textarea>
+    </div>
+
+    <div class="form-group mt-3">
+        <button type="submit" name="Action" value="Guardar y Salir" class="btn btn-primary">Guardar y Salir</button>
+        <button type="submit" name="Action" value="Finalizar" class="btn btn-success">Finalizar</button>
+        <a asp-action="BusquedaCodigo" class="btn btn-secondary">Cancelar</a>
+    </div>
+</form>
