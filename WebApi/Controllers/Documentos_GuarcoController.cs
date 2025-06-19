@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Office.Interop.Excel;
+using OfficeOpenXml;
+using OfficeOpenXml.Drawing.Chart;
 using System;
 using System.Security.Cryptography;
 using WebApi.Models;
@@ -293,6 +296,60 @@ namespace WebApi.Controllers
             GestorConexion objconexion = new GestorConexion();
             await objconexion.Eliminar_documentos(pID);
             return RedirectToAction("BusquedaCodigo", "Documentos_Guarco");
+        }
+        [HttpGet]
+        public  async Task<IActionResult> ExportarExcel()
+        {
+            ExcelPackage.License.SetNonCommercialPersonal("Javier");
+
+            var viewResult = await this.ConsultarDocumentos() as ViewResult;
+            var lista = viewResult?.Model as List<Documentos_GuarcoModel>
+                        ?? new List<Documentos_GuarcoModel>();
+            double promedioInicioFin = lista
+                .Where(d => d.Fecha_inicio.HasValue && d.Fecha_finalizacion.HasValue)
+                .Average(d => (d.Fecha_finalizacion.Value - d.Fecha_inicio.Value).TotalHours);
+            double promedioRevision = lista
+                .Where(d => d.Fecha_revision_inicio.HasValue && d.Fecha_revision_finalizacion.HasValue)
+                .Average(d => (d.Fecha_revision_finalizacion.Value - d.Fecha_revision_inicio.Value).TotalHours);
+            double promedioAprobacion = lista
+                .Where(d => d.Fecha_revision_inicio.HasValue && d.Fecha_aprobacion.HasValue)
+                .Average(d => (d.Fecha_aprobacion.Value - d.Fecha_revision_inicio.Value).TotalHours);
+
+            using var pkg = new ExcelPackage();
+            var ws = pkg.Workbook.Worksheets.Add("Promedios");
+
+            // Escribir encabezados y valores
+            ws.Cells[1, 1].Value = "Rango";
+            ws.Cells[1, 2].Value = "Horas";
+            var datos = new[]
+            {
+            ("Inicio → Final", promedioInicioFin),
+            ("Revisión", promedioRevision),
+            ("Aprobación", promedioAprobacion)
+        };
+            for (int i = 0; i < datos.Length; i++)
+            {
+                ws.Cells[i + 2, 1].Value = datos[i].Item1;
+                ws.Cells[i + 2, 2].Value = datos[i].Item2;
+            }
+            ws.Column(1).AutoFit();
+            ws.Column(2).AutoFit();
+
+            // Crear gráfico de columnas
+            var chart = ws.Drawings.AddChart("HorasChart", eChartType.ColumnClustered);
+            chart.Series.Add(ws.Cells[2, 2, 4, 2], ws.Cells[2, 1, 4, 1]);
+            chart.Title.Text = "Promedio de Horas";
+            chart.SetPosition(1, 0, 3, 0);
+            chart.SetSize(600, 300);
+
+            var stream = new MemoryStream();
+            pkg.SaveAs(stream);
+            stream.Position = 0;
+
+            string filename = $"PromediosHoras_{DateTime.Now:yyyyMMdd_HHmmss}.xlsx";
+            return File(stream,
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                filename);
         }
 
     }

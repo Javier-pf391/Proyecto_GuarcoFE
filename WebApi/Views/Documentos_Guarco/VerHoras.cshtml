@@ -5,6 +5,9 @@
 }
 
 <h2>Promedio de Horas</h2>
+<a class="btn btn-primary" asp-controller="Documentos_Guarco" asp-action="ExportarExcel">
+    Descargar Excel con gráfica
+</a>
 
 <ul>
     <li><strong>Inicio → Finalización:</strong> @Model.PromedioInicioFinal.ToString("0.##") horas</li>
