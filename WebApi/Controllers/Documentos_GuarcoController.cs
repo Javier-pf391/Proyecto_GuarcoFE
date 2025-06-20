@@ -219,12 +219,29 @@ namespace WebApi.Controllers
 
         public async Task<IActionResult> BusquedaCodigo(string pCodigo)
         {
-           
+            if (pCodigo == null)
+            {
+                pCodigo = string.Empty;
+            }
+
             Documentos_GuarcoModel model = new Documentos_GuarcoModel {codigo= pCodigo };
             GestorConexion obj = new GestorConexion();
             List<Documentos_GuarcoModel>resul = await obj.BusquedaCodigo(pCodigo);
             return View(resul);
         }
+        public async Task<IActionResult> AprobacionArea(string pAproArea)
+        {
+            if (pAproArea == null)
+            {
+                pAproArea = string.Empty;
+            }
+
+            Documentos_GuarcoModel model = new Documentos_GuarcoModel { nombre_area = pAproArea };
+            GestorConexion obj = new GestorConexion();
+            List<Documentos_GuarcoModel> resul = await obj.AprobacionArea(pAproArea);
+            return View("DocumentosAprobado", resul);
+        }
+
 
         public IActionResult Crear_documentos()
         {

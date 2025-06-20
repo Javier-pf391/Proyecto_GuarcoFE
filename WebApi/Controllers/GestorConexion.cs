@@ -129,12 +129,28 @@ namespace WebApi.Controllers
 
         public  async Task<List<Documentos_GuarcoModel>>BusquedaCodigo(string pCodigo)
         {
+           
             List<Documentos_GuarcoModel>lsDocumentos = new List<Documentos_GuarcoModel>();
             string rutaApi = @"api/Documentos_Guarco/BusquedaCodigo";
             ConexionApi.DefaultRequestHeaders.Add("pCodigo", pCodigo);
 
             HttpResponseMessage resul = await ConexionApi.GetAsync(rutaApi);
             if(resul.IsSuccessStatusCode)
+            {
+                string jsonstring = await resul.Content.ReadAsStringAsync();
+                lsDocumentos = JsonConvert.DeserializeObject<List<Documentos_GuarcoModel>>(jsonstring);
+            }
+            return lsDocumentos;
+        }
+        public async Task<List<Documentos_GuarcoModel>> AprobacionArea(string pAproArea)
+        {
+          
+            List<Documentos_GuarcoModel> lsDocumentos = new List<Documentos_GuarcoModel>();
+            string rutaApi = @"api/Documentos_Guarco/AprobacionArea";
+            ConexionApi.DefaultRequestHeaders.Add("pAproArea", pAproArea);
+
+            HttpResponseMessage resul = await ConexionApi.GetAsync(rutaApi);
+            if (resul.IsSuccessStatusCode)
             {
                 string jsonstring = await resul.Content.ReadAsStringAsync();
                 lsDocumentos = JsonConvert.DeserializeObject<List<Documentos_GuarcoModel>>(jsonstring);

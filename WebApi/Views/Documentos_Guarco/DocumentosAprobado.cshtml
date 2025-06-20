@@ -2,9 +2,17 @@
 
 @{
     ViewData["Title"] = "Documentos Aprobados";
+    string AreaBuscado = Context.Request.Query["pAproArea"];
 }
 
 <h1 style="color:aqua;">Lista de Documentos</h1>
+<form asp-action="AprobacionArea" asp-controller="Documentos_Guarco" method="get">
+    <div class="form-group">
+        <label for="pAproArea">Búsqueda Documentos por Area</label>
+        <input type="text" id="pAproArea" name="pAproArea" class="form-control" value="@AreaBuscado" />
+        <button type="submit" class="btn btn-primary mt-2">Buscar</button>
+    </div>
+</form>
 
 @if (Model != null && Model.Any())
 {

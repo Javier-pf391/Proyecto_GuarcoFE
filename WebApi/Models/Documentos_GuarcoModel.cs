@@ -26,9 +26,6 @@
         [Display(Name = "ESTADO")]
         public string estado { get; set; }
 
-        [Display(Name = "TELÉFONO")]
-        public int telefono { get; set; }
-
         [Display(Name = "FECHA HORA INICIO")]
         public DateTime? Fecha_inicio { get; set; }
 
@@ -53,7 +50,6 @@
             documento = string.Empty;
             nombre_area = string.Empty;
             estado = string.Empty;
-            telefono = 0;
             Fecha_inicio = null;
             Fecha_finalizacion = null;
             Fecha_revision_inicio = null;

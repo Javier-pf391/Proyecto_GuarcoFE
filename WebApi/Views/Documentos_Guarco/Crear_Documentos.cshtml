@@ -6,9 +6,45 @@
 @{
     var areas = new List<SelectListItem>
     {
-        new SelectListItem { Text = "Calidad", Value = "Calidad" },
-        new SelectListItem { Text = "Contabilidad", Value = "Contabilidad" },
-        new SelectListItem { Text = "Informática", Value = "Informática" }
+      new SelectListItem { Text = "Alcadia", Value = "Alcadia" },
+      new SelectListItem { Text = "Vice Alcadia", Value = "Vice Alcadia" },
+      new SelectListItem { Text = "G.Calidad", Value = "G.Calidad" },
+      new SelectListItem { Text = "G.RH", Value = "G.RH" },
+      new SelectListItem { Text = "G.Juridica", Value = "G.Juridica" },
+      new SelectListItem { Text = "P.Servicios", Value = "P.Servicios" },
+      new SelectListItem { Text = "TI", Value = "TI" },
+      new SelectListItem { Text = "Planificación", Value = "Planificación" },
+      new SelectListItem { Text = "G.Social", Value = "G.Social" },
+      new SelectListItem { Text = "Contabilidad", Value = "Contabilidad" },
+      new SelectListItem { Text = "Proveeduria", Value = "Proveeduria" },
+      new SelectListItem { Text = "Tesoreria", Value = "tesoreria" },
+      new SelectListItem { Text = "Presupuesto", Value = "Presupuesto" },
+      new SelectListItem { Text = "S.Generales", Value = "S.Generales" },
+      new SelectListItem { Text = "S.Ciudadana", Value = "S.Ciudadana" },
+      new SelectListItem { Text = "S.Ambientales", Value = "S.Ambientales" },
+      new SelectListItem { Text = "GIRH", Value = "GIRH" },
+      new SelectListItem { Text = "GIRS", Value = "GIRS" },
+      new SelectListItem { Text = "G.Ambiental Ins.", Value = "G.Ambiental Ins." },
+      new SelectListItem { Text = "Acueductos", Value = "Acueductos" },
+      new SelectListItem { Text = "Mante.Parques", Value = "Mante.Parques" },
+      new SelectListItem { Text = "Aseo de Vias", Value = "Aseo de Vias" },
+      new SelectListItem { Text = "Reco.Residuos Sol.", Value = "Reco.Residuos Sol" },
+      new SelectListItem { Text = "Patentes", Value = "Patentes" },
+      new SelectListItem { Text = "Valoracion", Value = "Valoracion" },
+      new SelectListItem { Text = "Bienes e Inmuebles", Value = "Bienes e Inmuebles" },
+      new SelectListItem { Text = "Cobr.Admin.Judicial", Value = "Cobr.Admin.Judicial" },
+      new SelectListItem { Text = "Cons.Plani.Urbana", Value = "Cons.Plani.Urbana" },
+      new SelectListItem { Text = "Topografia", Value = "Topografia" },
+      new SelectListItem { Text = "Catastro", Value = "Catastro" },
+      new SelectListItem { Text = "G.Proyec.Constr", Value = "G.Proyec.Constr" },
+      new SelectListItem { Text = "Pro.Social", Value = "Pro.social" },
+      new SelectListItem { Text = "G.Proyec.Contratados", Value = "G.Proyec.Contratados" },
+      new SelectListItem { Text = "Ofi.Mujer", Value = "Ofi.Mujer" },
+      new SelectListItem { Text = "Ninez y Adoles.", Value = "Ninez y Adoles." },
+      new SelectListItem { Text = "G.Cultural", Value = "G.Cultural" },
+
+      
+
     };
 }
 
@@ -36,12 +72,6 @@
             <option value=""></option>
         </select>
         <span asp-validation-for="nombre_area" class="text-danger"></span>
-    </div>
-
-    <div class="form-group col-md-6">
-        <label asp-for="telefono" class="control-label"></label>
-        <input asp-for="telefono" class="form-control" value="21064600" readonly />
-        <span asp-validation-for="telefono" class="text-danger"></span>
     </div>
 
     <div class="form-group col-md-6">
