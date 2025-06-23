@@ -219,27 +219,31 @@ namespace WebApi.Controllers
 
         public async Task<IActionResult> BusquedaCodigo(string pCodigo)
         {
-            if (pCodigo == null)
+            if (pCodigo is not null)
             {
-                pCodigo = string.Empty;
+                Documentos_GuarcoModel model = new Documentos_GuarcoModel { codigo = pCodigo };
+                GestorConexion Obj = new GestorConexion();
+                List<Documentos_GuarcoModel> result = await Obj.BusquedaCodigo(pCodigo);
+                return View(result);
             }
-
-            Documentos_GuarcoModel model = new Documentos_GuarcoModel {codigo= pCodigo };
             GestorConexion obj = new GestorConexion();
-            List<Documentos_GuarcoModel>resul = await obj.BusquedaCodigo(pCodigo);
+            List<Documentos_GuarcoModel> resul = await obj.ConsultarDocumentos();
             return View(resul);
+
         }
         public async Task<IActionResult> AprobacionArea(string pAproArea)
         {
-            if (pAproArea == null)
+            if (pAproArea is not null)
             {
-                pAproArea = string.Empty;
+                Documentos_GuarcoModel model = new Documentos_GuarcoModel { nombre_area = pAproArea };
+                GestorConexion Obj = new GestorConexion();
+                List<Documentos_GuarcoModel> result = await Obj.AprobacionArea(pAproArea);
+                return View("DocumentosAprobado", result);
             }
-
-            Documentos_GuarcoModel model = new Documentos_GuarcoModel { nombre_area = pAproArea };
             GestorConexion obj = new GestorConexion();
-            List<Documentos_GuarcoModel> resul = await obj.AprobacionArea(pAproArea);
+            List<Documentos_GuarcoModel> resul = await obj.DocumentosAprobado();
             return View("DocumentosAprobado", resul);
+
         }
 
 
