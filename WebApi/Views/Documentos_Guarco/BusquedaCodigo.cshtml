@@ -4,6 +4,24 @@
     ViewData["Title"] = "Búsqueda de Documento";
     string codigoBuscado = Context.Request.Query["pCodigo"];
 }
+<style>
+
+    .quality-tag {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 2rem; 
+        font-weight: bold;
+        color: red;
+        border-style: solid; 
+        border-width: thick;
+    }
+
+</style>
+
+<div class="quality-tag">
+    Gestión De Calidad
+</div>
 
 <h1 style="color:red;">Lista de Documentos</h1>
 

@@ -4,8 +4,25 @@
     ViewData["Title"] = "Documentos Aprobados";
     string AreaBuscado = Context.Request.Query["pAproArea"];
 }
+<style>
 
-<h1 style="color:aqua;">Lista de Documentos</h1>
+    .quality-tag {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 2rem; 
+        font-weight: bold;
+        color: green;
+        border-style: solid; 
+        border-width: thick;
+    }
+
+</style>
+
+<div class="quality-tag">
+    Gestión De Calidad
+</div>
+<h1 style="color:green;">Lista de Documentos</h1>
 <form asp-action="AprobacionArea" asp-controller="Documentos_Guarco" method="get">
     <div class="form-group">
         <label for="pAproArea">Búsqueda Documentos por Area</label>
